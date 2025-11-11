@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cro-MTVITS Cross-lingual Speech Synthesis Demonstration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            font-size: 22px;
+        }
+        .description {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 5px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            background-color: white; /* 确保表格背景为白色 */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+            color: #000; /* 黑色字体 */
+            background-color: white; /* 白色背景 */
+        }
+        th {
+            background-color: white; /* 表头也改为白色背景 */
+            color: #000; /* 黑色字体 */
+            font-weight: bold;
+            border-bottom: 2px solid #3498db; /* 添加底部边框增强可读性 */
+        }
+        tr:hover {
+            background-color: #f5f5f5; /* 悬停时轻微变色 */
+        }
+        audio {
+            width: 100%;
+            min-width: 200px;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+        .speaker-header {
+            background-color: white; /* 改为白色背景 */
+            color: #000; /* 黑色字体 */
+            font-weight: bold;
+        }
+        .emotion-cell {
+            font-weight: bold;
+            color: #000; /* 黑色字体 */
+        }
+        .model-name {
+            font-weight: bold;
+            color: #000; /* 黑色字体 */
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cro-MTVITS: An End-to-End Cross-Lingual Speech Synthesis Model for Mandarin and Multi-Dialect Tibetan</h1>
+        
+        <div class="description">
+            <p>This page demonstrates the effectiveness of the Cro-MTVITS model for Cross-Lingual Speech Synthesis Model for Mandarin and Multi-Dialect Tibetan.</p>
+        
+        </div>
+
+  <h2 align="center">Cross-Lingual Speech Synthesis</h2>
+    <table>
+        <tr>
+            <th>ReferenceSpeaker</th>
+            <th>Ground Truth</th>
+            <th>VITS-Baseline</th>
+            <th>Cro-MTVITS</th>
+        </tr>
+
+
+
+        <tr>
+            <td rowspan="2">Lhasa Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_wz.wav" controls></audio></div></td>
+            <td>Mandarin TEXT1：在三年时间内，通过科学的饮食和运动。<br><div class="audio-container"><audio src="wav\GT\SSB01450027.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB01450027_wz.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB01450027_wz.wav"  controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Mandarin  TEXT2：在球网前站好。<br><div class="audio-container"><audio src="wav\GT\SSB03800030.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB03800030_wz.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB03800030_wz.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td rowspan="2">Kham Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_kb.wav" controls></audio></div></td>
+           <td>Mandarin TEXT1：在三年时间内，通过科学的饮食和运动。<br><div class="audio-container"><audio src="wav\GT\SSB01450027.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB01450027_kb.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB01450027_kb.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Mandarin  TEXT2：在球网前站好。<br><div class="audio-container"><audio src="wav\GT\SSB03800030.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB03800030_kb.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB03800030_kb.wav" controls></audio></div></td>
+        </tr>
+   <tr>
+            <td rowspan="2">Amdo Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_ad.wav" controls></audio></div></td>
+           <td>Mandarin TEXT1：在三年时间内，通过科学的饮食和运动。<br><div class="audio-container"><audio src="wav\GT\SSB01450027.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB01450027_ad.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB01450027_ad.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Mandarin  TEXT2：在球网前站好。<br><div class="audio-container"><audio src="wav\GT\SSB03800030.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB03800030_ad.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB03800030_ad.wav" controls></audio></div></td>
+        </tr>
+
+
+        <tr>
+            <td rowspan="6">Mandarin Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_zh.wav" controls></audio></div></td>
+            <td>Lhasa TEXT1：བྱ་ཤ་སྲེག་པ་གནད་ལ་ཕོག <br><div class="audio-container"><audio src="wav\GT\(wzly)07581.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)07581_zh.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)07581_zh.wav" controls></audio></div></td>
+        </tr>
+
+        <tr>
+            <td>Lhasa TEXT2：རྨི་ལམ་གྱི་ཞིང་ཁམས་འགྲིམ། <br><div class="audio-container"><audio src="wav\GT\(wzly)09883.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)09883_zh.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)09883_zh.wav" controls></audio></div></td>
+        </tr>
+
+
+        <tr>
+            <td>Kham TEXT1：ཁོང་གཞུང་ལམ་བརྒྱུད་ནས་ཡོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)01196.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)01196_zh.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\KB\(kbry)01196_zh.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Kham TEXT2：གཞུང་གི་རླངས་འཁོར་དེ་བཀག་མ་སོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)02724.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_zh.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_zh.wav" controls></audio></div></td>
+        </tr>
+
+        <tr>
+            <td>Amdo TEXT1：ཁྱེད་ཚོར་འབྲེལ་ཡོད་ཀྱི་འཛིན་ཤོག་ཚང་མ་སྤྲད་སོང་། <br><div class="audio-container"><audio src="wav\GT\(adry)02915.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)02915_zh.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)02915_zh.wav" controls></audio></div></td>
+        </tr>
+
+        <tr>
+            <td>Amdo TEXT2：ཁྱེད་རང་སྔོན་ལ་ཞིབ་བཤེར་ཞིག་བྱེད། <br><div class="audio-container"><audio src="wav\GT\(adry)03119.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)03119_zh.wav"  controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)03119_zh.wav"  controls></audio></div></td>
+        </tr>
+
+
+    </table>
+
+
+
+
+    <h2 align="center">Intral-Lingual Speech Synthesis</h2>
+    <table>
+        <tr>
+            <th>Ground Truth</th>
+            <th>VITS-Baseline</th>
+            <th>Cro-MTVITS</th>
+        </tr>
+        <tr>
+            <td>Lhasa TEXT1：བྱ་ཤ་སྲེག་པ་གནད་ལ་ཕོག <br><div class="audio-container"><audio src="wav\GT\(wzly)07581.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)07581_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)07581_intral.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Lhasa TEXT2：རྨི་ལམ་གྱི་ཞིང་ཁམས་འགྲིམ། <br><div class="audio-container"><audio src="wav\GT\(wzly)09883.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)09883_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)09883_intral.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Kham TEXT1：ཁོང་གཞུང་ལམ་བརྒྱུད་ནས་ཡོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)01196.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)01196_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\KB\(kbry)01196_intral.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Kham TEXT2：གཞུང་གི་རླངས་འཁོར་དེ་བཀག་མ་སོང་།  <br><div class="audio-container"><audio src="wav\GT\(kbry)02724.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\KB\(kbry)02724_intral.wav" controls></audio></div></td></tr>
+        <tr>
+            <td>Amdo TEXT1：ཁྱེད་ཚོར་འབྲེལ་ཡོད་ཀྱི་འཛིན་ཤོག་ཚང་མ་སྤྲད་སོང་། <br><div class="audio-container"><audio src="wav\GT\(adry)02915.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)02915_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)02915_intral.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Amdo TEXT2：ཁྱེད་རང་སྔོན་ལ་ཞིབ་བཤེར་ཞིག་བྱེད། <br><div class="audio-container"><audio src="wav\GT\(adry)03119.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)03119_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)03119_intral.wav" controls></audio></div></td>
+        </tr>
+
+
+        <tr>
+            <td>Mandarin TEXT1：在三年时间内，通过科学的饮食和运动。<br><div class="audio-container"><audio src="wav\GT\SSB01450027.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB01450027_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB01450027_intral.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Mandarin  TEXT2：在球网前站好。<br><div class="audio-container"><audio src="wav\GT\SSB03800030.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\ZH\SSB03800030_intral.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\ZH\SSB03800030_intral.wav" controls></audio></div></td>
+        </tr>
+    </table>
+
+
+<h2 align="center">Cross-Dialect Speech Synthesis</h2>
+  
+   <table>
+        <tr>
+            <th>ReferenceSpeaker</th>
+            <th>Ground-Truth</th>
+            <th>VITS-Baseline</th>
+            <th>Cro-MTVITS</th>
+        </tr>
+        <tr>
+            <td rowspan="4">Lhasa Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_wz.wav" controls></audio></div></td>
+            <td>Amdo TEXT1：ཁྱེད་ཚོར་འབྲེལ་ཡོད་ཀྱི་འཛིན་ཤོག་ཚང་མ་སྤྲད་སོང་། <br><div class="audio-container"><audio src="wav\GT\(adry)02915.wav" controls></audio></div></td>
+         <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)02915_wz.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)02915_wz.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Amdo TEXT2：ཁྱེད་རང་སྔོན་ལ་ཞིབ་བཤེར་ཞིག་བྱེད། <br><div class="audio-container"><audio src="wav\GT\(adry)03119.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)03119_wz.wav"  controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)03119_wz.wav"  controls></audio></div></td>
+        </tr>
+        <tr>
+           <td>Kham TEXT1：ཁོང་གཞུང་ལམ་བརྒྱུད་ནས་ཡོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)01196.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)01196_wz.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\KB\(kbry)01196_wz.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+               <td>Kham TEXT2：གཞུང་གི་རླངས་འཁོར་དེ་བཀག་མ་སོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)02724.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_wz.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_wz.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td rowspan="4">Kham Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_kb.wav" controls></audio></div></td>
+             <td>Lhasa TEXT1：བྱ་ཤ་སྲེག་པ་གནད་ལ་ཕོག <br><div class="audio-container"><audio src="wav\GT\(wzly)07581.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)07581_kb.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)07581_kb.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+         <td>Lhasa TEXT2：རྨི་ལམ་གྱི་ཞིང་ཁམས་འགྲིམ། <br><div class="audio-container"><audio src="wav\GT\(wzly)09883.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)09883_kb.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)09883_kb.wav" controls></audio></div></td>
+        </tr>
+         <tr>
+            <td>Amdo TEXT1：ཁྱེད་ཚོར་འབྲེལ་ཡོད་ཀྱི་འཛིན་ཤོག་ཚང་མ་སྤྲད་སོང་། <br><div class="audio-container"><audio src="wav\GT\(adry)02915.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)02915_kb.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)02915_kb.wav" controls></audio></div></td>
+        </tr>
+
+        <tr>
+            <td>Amdo TEXT2：ཁྱེད་རང་སྔོན་ལ་ཞིབ་བཤེར་ཞིག་བྱེད། <br><div class="audio-container"><audio src="wav\GT\(adry)03119.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\AD\(adry)03119_kb.wav"  controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\AD\(adry)03119_kb.wav"  controls></audio></div></td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">Amdo Speaker<br><div class="audio-container"><audio src="wav\VITS-Baseline\ref_ad.wav" controls></audio></div></td>
+           <td>Lhasa TEXT1：བྱ་ཤ་སྲེག་པ་གནད་ལ་ཕོག <br><div class="audio-container"><audio src="wav\GT\(wzly)07581.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)07581_ad.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)07581_ad.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+         <td>Lhasa TEXT2：རྨི་ལམ་གྱི་ཞིང་ཁམས་འགྲིམ། <br><div class="audio-container"><audio src="wav\GT\(wzly)09883.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\WZ\(wzly)09883_ad.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\WZ\(wzly)09883_ad.wav" controls></audio></div></td>
+        </tr>
+   <tr>
+            <td>Kham TEXT1：ཁོང་གཞུང་ལམ་བརྒྱུད་ནས་ཡོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)01196.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)01196_ad.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\Cro-MTVITS\KB\(kbry)01196_ad.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Kham TEXT2：གཞུང་གི་རླངས་འཁོར་དེ་བཀག་མ་སོང་། <br><div class="audio-container"><audio src="wav\GT\(kbry)02724.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_ad.wav" controls></audio></div></td>
+            <td><div class="audio-container"><audio src="wav\VITS-Baseline\KB\(kbry)02724_ad.wav" controls></audio></div></td>
+        </tr>
+  </table>
+
+
+<h2 align="center">Code_switch Speech Synthesis</h2>
+    <table>
+        <tr>
+            <th>text</th>
+            <th>Cro-MTVITS</th>
+        </tr>
+        <tr>
+            <td rowspan="3">དེ་རིང་ང་རང་加油站ལ་ངིའ་མོ་ཊ་དརེ加油བྱེད་པར་འགྲོ་ཁན་ཡིན་ </td>
+            <td>Lhasa<br><div class="audio-container"><audio src="wav\Cro-MTVITS\code\ti_zh_2wz.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Kham<br><div class="audio-container"><audio src="wav\Cro-MTVITS\code\ti_zh_2kb.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Amdo<br><div class="audio-container"><audio src="wav\Cro-MTVITS\code\ti_zh_2ad.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td rowspan="3">这件衣服怎么卖?གོང་ཚད་དམའ་རོ་བཏང་ན་འགྲིག་གམ་ </td>
+            <td>Lhasa<br><div class="audio-container"><audio src="wav\Cro-MTVITS\code\ti_zh_5wz.wav" controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Kham<br><div class="audio-container"><audio src=wav\Cro-MTVITS\code\ti_zh_5kb.wav controls></audio></div></td>
+        </tr>
+        <tr>
+            <td>Amdo<br><div class="audio-container"><audio src="wav\Cro-MTVITS\code\ti_zh_5ad.wav" controls></audio></div></td>
+        </tr>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+        
+        <div class="loading" id="loading-message">
+            正在加载音频，请稍候...
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loading-message').style.display = 'none';
+            }, 2000);
+            
+            const audioElements = document.querySelectorAll('audio');
+            audioElements.forEach(audio => {
+                audio.addEventListener('play', function() {
+                    audioElements.forEach(otherAudio => {
+                        if (otherAudio !== audio && !otherAudio.paused) {
+                            otherAudio.pause();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
